@@ -1,0 +1,50 @@
+[{
+  "_id": {
+    "$oid": "6837ece450a373858890a673"
+  },
+  "imgPath": "",
+  "title": "Book One",
+  "author": "Author One",
+  "price": 20.99,
+  "inStock": 9
+},
+{
+  "_id": {
+    "$oid": "6837ece450a373858890a674"
+  },
+  "imgPath": "",
+  "title": "Book Two",
+  "author": "Author Two",
+  "price": 16.49,
+  "inStock": 8
+},
+{
+  "_id": {
+    "$oid": "6837ece450a373858890a675"
+  },
+  "imgPath": "",
+  "title": "Book Three",
+  "author": "Author Three",
+  "price": 21.19,
+  "inStock": 8
+},
+{
+  "_id": {
+    "$oid": "6837ece450a373858890a676"
+  },
+  "imgPath": "",
+  "title": "Book Four",
+  "author": "Author Four",
+  "price": 28.99,
+  "inStock": 8
+},
+{
+  "_id": {
+    "$oid": "6837ece450a373858890a677"
+  },
+  "imgPath": "",
+  "title": "Book Five",
+  "author": "Author Five",
+  "price": 25.89,
+  "inStock": 8
+}]
