@@ -8,6 +8,7 @@ type Book {
 }
 
 type Query {
-  getBooks: [Book]
+  books: [Book]
+  singleBook(bookId: String): Book
 }
 `;
