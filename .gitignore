@@ -1,0 +1,5 @@
+backend-express/node_modules
+backend-express/dist
+backend-graphql/node_modules
+backend-graphql/dist
+frontend/node_modules
