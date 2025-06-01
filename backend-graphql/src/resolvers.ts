@@ -28,6 +28,7 @@ export const resolvers = {
         message: "",
         isSuccessful: true
       }
+
       try {
         const { imgPath, title, author, price, inStock } = args;
         await mongoose.connect("mongodb://127.0.0.1:27017/bookShopThreeDB");
@@ -38,11 +39,41 @@ export const resolvers = {
           price,
           inStock
         });
-
         await newBook.save();
         await mongoose.connection.close();
         response.message = "Successfully added";
         response.isSuccessful = true;
+      } catch(error) {
+        response.message = error.message;
+        response.isSuccessful = false;
+      }
+
+      return response;
+    },
+    updateBook: async (parent, args) => {
+      const response: Response = {
+        message: "",
+        isSuccessful: true
+      };
+
+      try {
+        const { bookId, imgPath, title, author, price, inStock } = args;
+        await mongoose.connect("mongodb://127.0.0.1:27017/bookShopThreeDB");
+        const result = await Book.updateOne({ _id: bookId }, {
+          imgPath: imgPath,
+          title: title,
+          author: author,
+          price: price,
+          inStock: inStock
+        });
+        await mongoose.connection.close();
+        if (result.modifiedCount === 0) {
+          response.message = `The book having bookId ${bookId} was not found`;
+          response.isSuccessful = false;
+        } else {
+          response.message = "Successfully updated";
+          response.isSuccessful = true;
+        }
       } catch(error) {
         response.message = error.message;
         response.isSuccessful = false;

@@ -93,3 +93,28 @@ Variables:
   "price": 29.49,
   "inStock": 8
 }
+
+- Example 9:
+mutation UpdateBook {
+  updateBook(bookId: "6837ece450a373858890a674", imgPath: "", title: "Book Two", author: "Author Two", price: 16.49, inStock: 10) {
+    message
+    isSuccessful
+  }
+}
+
+- Example 10:
+mutation UpdateBook($bookId: String, $imgPath: String, $title: String, $author: String, $price: Float, $inStock: Int) {
+  updateBook(bookId: $bookId, imgPath: $imgPath, title: $title, author: $author, price: $price, inStock: $inStock) {
+    message
+    isSuccessful
+  }
+}
+Variables:
+{
+  "bookId": "6837ece450a373858890a674",
+  "imgPath": "",
+  "title": "Book Two",
+  "author": "Author Two",
+  "price": 16.49,
+  "inStock": 8
+}
