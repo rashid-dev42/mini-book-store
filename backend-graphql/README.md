@@ -118,3 +118,21 @@ Variables:
   "price": 16.49,
   "inStock": 8
 }
+
+- Example 11:
+mutation DeleteBook {
+  deleteBook(bookId: "683a91b53e15d55e55564193") {
+    message
+    isSuccessful
+  }
+}
+
+- Example 12:
+mutation DeleteBook($bookId: String) {
+  deleteBook(bookId: $bookId) {
+    message
+    isSuccessful
+  }
+}
+Variables:
+{ "bookId": "683a91d83e15d55e55564195" }

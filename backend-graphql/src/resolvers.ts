@@ -80,6 +80,31 @@ export const resolvers = {
       }
 
       return response;
+    },
+    deleteBook: async (parent, args) => {
+      const response: Response = {
+        message: "",
+        isSuccessful: true
+      }
+
+      try {
+        const { bookId } = args;
+        await mongoose.connect("mongodb://127.0.0.1:27017/bookShopThreeDB");
+        const result = await Book.deleteOne({ _id: bookId });
+        await mongoose.connection.close();
+        if (result.deletedCount === 0) {
+          response.message = `The book having bookId ${bookId} was not found`;
+          response.isSuccessful = false;
+        } else {
+          response.message = "Successfully deleted";
+          response.isSuccessful = true;
+        }
+      } catch(error) {
+        response.message = error.message;
+        response.isSuccessful = false;
+      }
+
+      return response;
     }
   }
 };
