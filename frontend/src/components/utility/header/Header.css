@@ -1,0 +1,12 @@
+.Header-heading, .Header-navbar {
+  text-align: center;
+  padding: 15px 0;
+}
+
+.Header-navbar-link {
+  text-decoration: none;
+  color: #fff;
+  border: 2px solid #fff;
+  padding: 5px 10px;
+  margin: 0 5px;
+}
