@@ -1,0 +1,15 @@
+.SingleItem {
+  width: 250px;
+  margin: 0 auto 10px auto;
+  border: 2px solid white;
+}
+
+.SingleItem-image {
+  display: block;
+  width: 246px;
+  height: 300px;
+}
+
+.SingleItem > h3 {
+  margin: 5px;
+}

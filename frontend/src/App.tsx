@@ -2,6 +2,7 @@ import "./App.css";
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./components/utility/layout/Layout";
+import AllBooks from "./components/allBooks/AllBooks";
 
 const App: React.FC = () => {
   return (
@@ -9,7 +10,7 @@ const App: React.FC = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout>
-            <h2>All Books</h2>
+            <AllBooks />
           </Layout>}/>
           <Route path="/all-books" element={<Layout>
             <h2>All Books</h2>
