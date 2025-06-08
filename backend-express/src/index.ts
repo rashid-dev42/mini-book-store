@@ -1,6 +1,9 @@
 import express, { Request, Response } from "express";
 import cors from "cors";
 import multer from "multer";
+import mongoose from "mongoose";
+import fs from "fs";
+import { Book } from "./models/bookModel";
 const app = express();
 const port = 5000;
 
@@ -30,9 +33,37 @@ app.post("/upload-book-image", upload.single("bookImage"), (req: Request, res: R
     res.status(200).send({
       imgPath: req?.file?.path || "",
     });
-  } catch (error) {
-    res.status(500).send({
-      message: "Sorry, something went wrong"
+  } catch (error: any) {
+    res.status(error.status || 500).send({
+      message: error.message || "Sorry, something went wrong"
+    });
+  }
+});
+
+app.put("/update-book-image", upload.single("newBookImage"), async (req: Request, res: Response) => {
+  try {
+    const bookId = req.body.bookId;
+    await mongoose.connect("mongodb://127.0.0.1:27017/bookShopThreeDB");
+    const result = await Book.findOne({ _id: bookId }, { imgPath: 1, _id: 0 });
+    const prevImagePath: string = result?.imgPath || "";
+    if (prevImagePath !== "") {
+      fs.unlink(prevImagePath, (error) => {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log(`${prevImagePath} was deleted successfully`);
+        }
+      })
+    }
+    const newImagePath = req?.file?.path || "";
+    await Book.updateOne({ _id: bookId }, { $set: { imgPath: newImagePath } })
+    await mongoose.connection.close();
+    res.status(200).send({
+      imgPath: newImagePath || ""
+    });
+  } catch (error: any) {
+    res.status(error.status || 500).send({
+      message: error.message || "Sorry, something went wrong"
     });
   }
 });
