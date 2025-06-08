@@ -1,0 +1,26 @@
+.SingleBook-form {
+  display: block;
+  width: 250px;
+  margin: 0 auto;
+}
+
+.SingleBook-form > input {
+  display: block;
+  width: 100%;
+  background-color: #242424;
+  color: #fff;
+  border: 2px solid #fff;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+.SingleBook-form > input:focus {
+  outline: none;
+}
+
+.SingleBook-form > button {
+  display: block;
+  width: 100%;
+  padding: 5px 0;
+  cursor: pointer; 
+}
