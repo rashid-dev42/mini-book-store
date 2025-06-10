@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./components/utility/layout/Layout";
 import AllBooks from "./components/allBooks/AllBooks";
 import SingleBook from "./components/singleBook/SingleBook";
+import AddBook from "./components/addBook/AddBook";
 
 const App: React.FC = () => {
   return (
@@ -20,7 +21,7 @@ const App: React.FC = () => {
             <SingleBook />
           </Layout>}/>
           <Route path="/add-book" element={<Layout>
-            <h2>Add Book</h2>
+            <AddBook />
           </Layout>}/>
           <Route path="/update-book" element={<Layout>
             <h2>Update Books</h2>

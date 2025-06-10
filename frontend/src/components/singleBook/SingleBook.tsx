@@ -1,5 +1,5 @@
 import "./SingleBook.css";
-import React, { useState, FormEvent } from "react";
+import React, { useState, useRef } from "react";
 import { useQuery, gql } from "@apollo/client";
 import SingleItem from "../utility/singleItem/SingleItem";
 
@@ -30,11 +30,12 @@ const DisplaySingleBook: React.FC<Props> = ({ bookId }) => {
 };
 
 const SingleBook: React.FC = () => {
-  const [bookId, setBookId] = useState("");
+  const [bookId, setBookId] = useState<any>("");
+  const bookIdInput = useRef<HTMLInputElement>(null);
 
-  const handleSubmit = (event: FormEvent) => {
+  const handleSubmit = (event: React.FormEvent): void => {
     event.preventDefault();
-    setBookId(document.getElementById("book-id").value);
+    setBookId(bookIdInput?.current?.value);
   };
 
   return (
@@ -42,7 +43,7 @@ const SingleBook: React.FC = () => {
       <h2 className="component-heading">Single Book</h2>
       <form className="SingleBook-form" onSubmit={handleSubmit}>
         <h3>Enter Book Id:</h3>
-        <input type="text" id="book-id"/>
+        <input type="text" ref={bookIdInput}/>
         <button type="submit">Search</button>
       </form><br />
       {bookId !== "" && <DisplaySingleBook bookId={bookId} />}

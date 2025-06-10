@@ -20,6 +20,7 @@ const SingleItem: React.FC<Props> = (props: Props) => {
     <div className="SingleItem">
       {props.book.imgPath === "" && <img src={imageNotFound} alt="" className="SingleItem-image"/>}
       {props.book.imgPath !== "" && <img src={import.meta.env.VITE_BAKCEND_EXPRESS_URL + "/" + props.book.imgPath} alt="" className="SingleItem-image"/>}
+      <h3>Bood Id: {props.book._id}</h3>
       <h3>Title: {props.book.title}</h3>
       <h3>Author: {props.book.author}</h3>
       <h3>Price: {props.book.price}</h3>
