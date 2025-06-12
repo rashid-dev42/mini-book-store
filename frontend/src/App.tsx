@@ -5,6 +5,7 @@ import Layout from "./components/utility/layout/Layout";
 import AllBooks from "./components/allBooks/AllBooks";
 import SingleBook from "./components/singleBook/SingleBook";
 import AddBook from "./components/addBook/AddBook";
+import UpdateBook from "./components/updateBook/UpdateBook";
 
 const App: React.FC = () => {
   return (
@@ -24,7 +25,7 @@ const App: React.FC = () => {
             <AddBook />
           </Layout>}/>
           <Route path="/update-book" element={<Layout>
-            <h2>Update Books</h2>
+            <UpdateBook />
           </Layout>}/>
           <Route path="/delete-book" element={<Layout>
             <h2>Delete Book</h2>

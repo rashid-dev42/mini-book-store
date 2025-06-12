@@ -1,0 +1,32 @@
+.UpdateBook-form {
+  display: block;
+  width: 250px;
+  margin: 0 auto;
+}
+
+.UpdateBook-form > img {
+  display: block;
+  width: 250px;
+  height: 300px;
+}
+
+.UpdateBook-form > input {
+  display: block;
+  width: 100%;
+  border: 2px solid #fff;
+  padding: 5px;
+  background-color: #242424;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.UpdateBook-form > input:focus {
+  outline: none;
+}
+
+.UpdateBook-form > button {
+  display: block;
+  width: 100%;
+  padding: 5px 0;
+  cursor: pointer;
+}
