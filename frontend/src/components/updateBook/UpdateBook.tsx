@@ -2,6 +2,7 @@ import "./UpdateBook.css";
 import React, { useState, useRef } from "react";
 import { useQuery, useMutation, gql } from "@apollo/client";
 import axios from "axios";
+import ToastMessage from "../utility/toastMessage/ToastMessage";
 
 const GET_SINGLE_BOOK = gql`
   query GetSingleBook($bookId: String) {
@@ -59,6 +60,9 @@ const UpdateSingleBook: React.FC<BookProps> = ({ book }) => {
   const [author, setAuthor] = useState<string>(book.author);
   const [price, setPrice] = useState<string>(book.price.toString());
   const [inStock, setInStock] = useState<string>(book.inStock.toString());
+  const [showToastMessage, setShowToastMessage] = useState<boolean>(false);
+  const [message, setMessage] = useState<string>("");
+  const [isSuccessful, setIsSuccessful] = useState<boolean>(true);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -87,7 +91,9 @@ const UpdateSingleBook: React.FC<BookProps> = ({ book }) => {
       price: bookInfo.price,
       inStock: bookInfo.inStock
     } });
-    console.log(updateBookResponse);
+    setMessage(updateBookResponse.data.updateBook.message);
+    setIsSuccessful(updateBookResponse.data.updateBook.isSuccessful);
+    setShowToastMessage(true);
   };
 
   return (
@@ -139,6 +145,7 @@ const UpdateSingleBook: React.FC<BookProps> = ({ book }) => {
         />
         <button type="submit">Submit</button>
       </form><br />
+      {showToastMessage && <ToastMessage message={message} isSuccessful={isSuccessful} setShowToastMessage={setShowToastMessage} setMessage={setMessage} setIsSuccessful={setIsSuccessful}/>}
     </div>
   );
 };

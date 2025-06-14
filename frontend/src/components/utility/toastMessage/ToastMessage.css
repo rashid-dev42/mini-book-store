@@ -1,0 +1,26 @@
+.ToastMessage {
+  width: 275px;
+  position: fixed;
+  top: 15px;
+  right: 15px;
+}
+
+.ToastMessage-div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 10px;
+}
+
+.ToastMessage-div > h3 {
+  padding-right: 10px;
+}
+
+.ToastMessage-div > button {
+  background-color: white;
+  color: black;
+  border: 1px solid white;
+  cursor: pointer;
+  padding: 0 4px;
+  height: 24px;
+}

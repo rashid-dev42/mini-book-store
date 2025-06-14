@@ -2,6 +2,7 @@ import "./AddBook.css";
 import React, { useState } from "react";
 import axios from "axios";
 import { useMutation, gql } from "@apollo/client";
+import ToastMessage from "../utility/toastMessage/ToastMessage";
 
 interface Book {
   imgPath:  string,
@@ -18,6 +19,9 @@ const AddBook: React.FC = () => {
   const [author, setAuthor] = useState<string>("");
   const [price, setPrice] = useState<string>("");
   const [inStock, setInStock] = useState<string>("");
+  const [showToastMessage, setShowToastMessage] = useState<boolean>(false);
+  const [message, setMessage] = useState<string>("");
+  const [isSuccessful, setIsSuccessful] = useState<boolean>(true);
 
   const ADD_BOOK = gql`
     mutation AddBook($imgPath: String, $title: String, $author: String, $price: Float, $inStock: Int) {
@@ -49,7 +53,9 @@ const AddBook: React.FC = () => {
       price: newBook.price,
       inStock: newBook.inStock
     } });
-    console.log(addBookResponse);
+    setMessage(addBookResponse.data.addBook.message);
+    setIsSuccessful(addBookResponse.data.addBook.isSuccessful);
+    setShowToastMessage(true);
   };
 
   return (
@@ -99,6 +105,7 @@ const AddBook: React.FC = () => {
         />
         <button type="submit">Submit</button>
       </form>
+      {showToastMessage && <ToastMessage message={message} isSuccessful={isSuccessful} setShowToastMessage={setShowToastMessage} setMessage={setMessage} setIsSuccessful={setIsSuccessful}/>}
     </div>
   );
 };
