@@ -68,9 +68,9 @@ app.put("/update-book-image", upload.single("newBookImage"), async (req: Request
   }
 });
 
-app.delete("/delete-book-image", async (req: Request, res: Response) => {
+app.delete("/delete-book-image/:bookId", async (req: Request, res: Response) => {
   try {
-    const bookId = req.body.bookId;
+    const bookId = req.params.bookId;
     await mongoose.connect("mongodb://127.0.0.1:27017/bookShopThreeDB");
     const result = await Book.findOne({ _id: bookId }, { imgPath: 1, _id: 0 });
     const bookImagePath: string = result?.imgPath || "";
