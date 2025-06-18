@@ -68,6 +68,30 @@ app.put("/update-book-image", upload.single("newBookImage"), async (req: Request
   }
 });
 
+app.delete("/delete-book-image", async (req: Request, res: Response) => {
+  try {
+    const bookId = req.body.bookId;
+    await mongoose.connect("mongodb://127.0.0.1:27017/bookShopThreeDB");
+    const result = await Book.findOne({ _id: bookId }, { imgPath: 1, _id: 0 });
+    const bookImagePath: string = result?.imgPath || "";
+    if (bookImagePath !== "") {
+      fs.unlink(bookImagePath, (error) => {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log(`${bookImagePath} was deleted successfully`);
+        }
+      });
+    }
+    await mongoose.connection.close();
+    res.status(204).send();
+  } catch (error: any) {
+    res.status(error.status || 500).send({
+      message: error.message || "Sorry, something went wrong"
+    });
+  }
+});
+
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
