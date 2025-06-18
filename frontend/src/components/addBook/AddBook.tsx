@@ -56,12 +56,21 @@ const AddBook: React.FC = () => {
     setMessage(addBookResponse.data.addBook.message);
     setIsSuccessful(addBookResponse.data.addBook.isSuccessful);
     setShowToastMessage(true);
+    resetForm();
+  };
+
+  const resetForm = (): void => {
+    setBookImagePreview("");
+    const addBookForm = document.getElementById("AddBook-form") as HTMLFormElement;
+    if (addBookForm) {
+      addBookForm.reset();
+    }
   };
 
   return (
     <div>
       <h2 className="component-heading">Add Book</h2>
-      <form className="AddBook-form" encType="multipart/form-data" onSubmit={handleSubmit}>
+      <form className="AddBook-form" id="AddBook-form" encType="multipart/form-data" onSubmit={handleSubmit}>
         {bookImagePreview !== "" && <img src={bookImagePreview} alt=""/>}
         <h3>Upload Book Image:</h3>
         <input
