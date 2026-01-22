@@ -9,14 +9,14 @@ type Response = {
 export const resolvers = {
   Query: {
     books: async () => {
-      await mongoose.connect("mongodb://127.0.0.1:27017/bookShopThreeDB");
+      await mongoose.connect(process.env.MONGODB_URI);
       const result = await Book.find();
       await mongoose.connection.close();
       return result;
     },
     singleBook: async (parent, args) => {
       const { bookId } = args;
-      await mongoose.connect("mongodb://127.0.0.1:27017/bookShopThreeDB");
+      await mongoose.connect(process.env.MONGODB_URI);
       const result = await Book.findOne({ _id: bookId });
       await mongoose.connection.close();
       return result;
@@ -31,7 +31,7 @@ export const resolvers = {
 
       try {
         const { imgPath, title, author, price, inStock } = args;
-        await mongoose.connect("mongodb://127.0.0.1:27017/bookShopThreeDB");
+        await mongoose.connect(process.env.MONGODB_URI);
         const newBook = new Book({
           imgPath,
           title,
@@ -58,7 +58,7 @@ export const resolvers = {
 
       try {
         const { bookId, imgPath, title, author, price, inStock } = args;
-        await mongoose.connect("mongodb://127.0.0.1:27017/bookShopThreeDB");
+        await mongoose.connect(process.env.MONGODB_URI);
         const result = await Book.updateOne({ _id: bookId }, {
           imgPath: imgPath,
           title: title,
@@ -89,7 +89,7 @@ export const resolvers = {
 
       try {
         const { bookId } = args;
-        await mongoose.connect("mongodb://127.0.0.1:27017/bookShopThreeDB");
+        await mongoose.connect(process.env.MONGODB_URI);
         const result = await Book.deleteOne({ _id: bookId });
         await mongoose.connection.close();
         if (result.deletedCount === 0) {

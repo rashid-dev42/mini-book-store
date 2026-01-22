@@ -1,5 +1,7 @@
 backend-express/node_modules
 backend-express/dist
+backend-express/.env
 backend-graphql/node_modules
 backend-graphql/dist
+backend-graphql/.env
 frontend/node_modules

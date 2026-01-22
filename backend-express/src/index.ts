@@ -1,4 +1,5 @@
 import express, { Request, Response } from "express";
+import "dotenv/config";
 import cors from "cors";
 import multer from "multer";
 import mongoose from "mongoose";
@@ -43,7 +44,8 @@ app.post("/upload-book-image", upload.single("bookImage"), (req: Request, res: R
 app.put("/update-book-image", upload.single("newBookImage"), async (req: Request, res: Response) => {
   try {
     const bookId = req.body.bookId;
-    await mongoose.connect("mongodb://127.0.0.1:27017/bookShopThreeDB");
+    const mongodbURI: any = process.env.MNOGODB_URI;
+    await mongoose.connect(mongodbURI);
     const result = await Book.findOne({ _id: bookId }, { imgPath: 1, _id: 0 });
     const prevImagePath: string = result?.imgPath || "";
     if (prevImagePath !== "") {
@@ -71,7 +73,8 @@ app.put("/update-book-image", upload.single("newBookImage"), async (req: Request
 app.delete("/delete-book-image/:bookId", async (req: Request, res: Response) => {
   try {
     const bookId = req.params.bookId;
-    await mongoose.connect("mongodb://127.0.0.1:27017/bookShopThreeDB");
+    const mongodbURI: any = process.env.MNOGODB_URI;
+    await mongoose.connect(mongodbURI);
     const result = await Book.findOne({ _id: bookId }, { imgPath: 1, _id: 0 });
     const bookImagePath: string = result?.imgPath || "";
     if (bookImagePath !== "") {
