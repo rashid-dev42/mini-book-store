@@ -26,7 +26,7 @@ app.use(express.json());
 app.use("/uploads", express.static("uploads"));
 
 app.get("/", (req: Request, res: Response) => {
-  res.status(200).send("WELCOME TO BOOK-SHOP-WEBAPP-THREE");
+  res.status(200).send("WELCOME TO MINI-BOOK-STORE");
 });
 
 app.post("/upload-book-image", upload.single("bookImage"), (req: Request, res: Response) => {
@@ -44,7 +44,7 @@ app.post("/upload-book-image", upload.single("bookImage"), (req: Request, res: R
 app.put("/update-book-image", upload.single("newBookImage"), async (req: Request, res: Response) => {
   try {
     const bookId = req.body.bookId;
-    const mongodbURI: any = process.env.MNOGODB_URI;
+    const mongodbURI: any = process.env.MONGODB_URI;
     await mongoose.connect(mongodbURI);
     const result = await Book.findOne({ _id: bookId }, { imgPath: 1, _id: 0 });
     const prevImagePath: string = result?.imgPath || "";
@@ -58,7 +58,7 @@ app.put("/update-book-image", upload.single("newBookImage"), async (req: Request
       })
     }
     const newImagePath = req?.file?.path || "";
-    await Book.updateOne({ _id: bookId }, { $set: { imgPath: newImagePath } })
+    // await Book.updateOne({ _id: bookId }, { $set: { imgPath: newImagePath } });
     await mongoose.connection.close();
     res.status(200).send({
       imgPath: newImagePath || ""

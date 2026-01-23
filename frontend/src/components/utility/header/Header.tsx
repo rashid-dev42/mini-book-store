@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const Header: React.FC = () => {
   return (
     <div>
-      <h1 className="Header-heading">BOOK-SHOP-WEBAPP-THREE</h1>
+      <h1 className="Header-heading">MINI-BOOK-STORE</h1>
       <hr />
       <div className="Header-navbar">
         <Link className="Header-navbar-link" to="/all-books">All Books</Link>

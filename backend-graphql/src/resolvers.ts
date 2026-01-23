@@ -59,20 +59,26 @@ export const resolvers = {
       try {
         const { bookId, imgPath, title, author, price, inStock } = args;
         await mongoose.connect(process.env.MONGODB_URI);
-        const result = await Book.updateOne({ _id: bookId }, {
-          imgPath: imgPath,
-          title: title,
-          author: author,
-          price: price,
-          inStock: inStock
-        });
-        await mongoose.connection.close();
-        if (result.modifiedCount === 0) {
+        const book = await Book.findOne({ _id: bookId });
+        if (!book) {
           response.message = `The book having bookId ${bookId} was not found`;
           response.isSuccessful = false;
         } else {
-          response.message = "Successfully updated";
-          response.isSuccessful = true;
+          const result = await Book.updateOne({ _id: bookId }, {
+            imgPath: imgPath,
+            title: title,
+            author: author,
+            price: price,
+            inStock: inStock
+          });
+          await mongoose.connection.close();
+          if (result.modifiedCount === 0) {
+            response.message = `The book info is up to date`;
+            response.isSuccessful = false;
+          } else {
+            response.message = "Successfully updated";
+            response.isSuccessful = true;
+          }
         }
       } catch(error) {
         response.message = error.message;
