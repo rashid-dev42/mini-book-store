@@ -9,8 +9,18 @@ const server = new ApolloServer({
   resolvers,
 });
 
+interface ListenConfig {
+  port: any,
+  host: string
+}
+
+const listenConfig: ListenConfig = {
+  port: process.env.PORT || 4000,
+  host: "0.0.0.0"
+};
+
 const { url } = await startStandaloneServer(server, {
-  listen: { port: 4000 },
+  listen: listenConfig,
 });
 
 console.log(`Server ready at: ${url}`);
