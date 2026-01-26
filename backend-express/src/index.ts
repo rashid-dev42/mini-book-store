@@ -96,5 +96,5 @@ app.delete("/delete-book-image/:bookId", async (req: Request, res: Response) => 
 });
 
 app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+  console.log(`Server running at https://mini-book-store-backend-express.onrender.com`);
 });
