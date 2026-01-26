@@ -5,7 +5,7 @@ import './index.css'
 import App from './App.tsx'
 
 const client = new ApolloClient({
-  uri: 'http://localhost:4000',
+  uri: 'https://mini-book-store-backend-graphql.onrender.com',
   cache: new InMemoryCache(),
 });
 
