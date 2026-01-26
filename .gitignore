@@ -5,4 +5,3 @@ backend-graphql/node_modules
 backend-graphql/dist
 backend-graphql/.env
 frontend/node_modules
-frontend/.env
